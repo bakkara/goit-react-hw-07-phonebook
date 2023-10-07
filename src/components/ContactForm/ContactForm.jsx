@@ -7,12 +7,12 @@ import { addContact } from 'redux/operations';
 import { toast } from "react-hot-toast";
 
 
- const ContactSchema = Yup.object().shape({
+ export const ContactSchema = Yup.object().shape({
     name: Yup.string()
     .test(
       "name",
       "Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan",
-      value => /^[a-zA-Zа-яА-Я]+((['][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/.test(value)
+      value => /^[a-zA-Zа-яА-ЯёЁіІїЇ ]+((['][a-zA-Zа-яА-ЯёЁіІїЇ ])?[a-zA-Zа-яА-ЯёЁіІїЇ]*)*$/.test(value)
     )
     .required('Required'),
     phone: Yup.string()
@@ -20,7 +20,7 @@ import { toast } from "react-hot-toast";
       "phone",
       "Phone number must be digits and can contain spaces, dashes, parentheses and can start with +",
       value =>
-        /\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}/.test(
+        /\+?[0-9\s.\-()]{1,}$/.test(
           value
         )
     )
