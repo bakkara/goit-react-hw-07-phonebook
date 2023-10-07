@@ -2,8 +2,8 @@ import { Formik } from "formik";
 import * as Yup from 'yup';
 import { Button, ErrorMsg, Label, StyledField, StyledForm } from "./ContactForm.styled";
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from 'redux/selectors';
-import { addContact } from 'redux/contactsSlice';
+import { selectContacts } from 'redux/selectors';
+import { addContact } from 'redux/operations';
 import { toast } from "react-hot-toast";
 
 
@@ -28,7 +28,7 @@ import { toast } from "react-hot-toast";
  });
 
 export const ContactForm = () => {
-    const contacts = useSelector(getContacts);
+    const contacts = useSelector(selectContacts);
     const dispatch = useDispatch();
 
     const handleSubmit = (values, actions) => {

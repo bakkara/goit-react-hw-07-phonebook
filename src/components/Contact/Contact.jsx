@@ -1,10 +1,10 @@
 import { Button } from "components/ContactForm/ContactForm.styled"
 import { ContactWrapper } from "./Contact.styled"
 import { useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/contactsSlice';
+import { deleteContact } from 'redux/operations';
 
 export const Contact = ({
-    contact: { id, name, number },
+    contact: { id, name, phone },
 }) => {
   const dispatch = useDispatch();
   const handleDelete = contactId => {
@@ -12,7 +12,7 @@ export const Contact = ({
   };
     return (
         <ContactWrapper>
-            <p>{name}: {number}</p>
+            <p>{name}: {phone}</p>
         <Button onClick={() => handleDelete(id)}>Delete</Button>
         </ContactWrapper>
     )

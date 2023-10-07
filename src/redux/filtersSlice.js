@@ -3,7 +3,6 @@ const { createSlice } = require("@reduxjs/toolkit")
 const filterInitialState = ''
 
 const filterSlice = createSlice({
-
     name: 'filter',
     initialState: filterInitialState,
     reducers: {
