@@ -6,11 +6,13 @@ import { Layout } from "./Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchContacts } from "redux/operations";
-import { selectError, selectIsLoading } from "redux/selectors";
+import { selectContacts, selectError, selectIsLoading } from "redux/selectors";
+import { Loader } from "./Loader/Loader";
 
 
 export const App = () => {
-const dispatch = useDispatch();
+  const contacts = useSelector(selectContacts)
+  const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
    
@@ -25,9 +27,12 @@ const dispatch = useDispatch();
         <ContactForm />
         <h2>Contacts</h2>
         
-       <Filter />
+        <Filter />
+        {isLoading && !error && <Loader/>}
+        {contacts.length === 0 && (
+          <p>There are no any contacts ... </p>)}
         <ContactList />
-        {isLoading && !error && <b>Request in progress...</b>}
+        
         <Toaster/>
      </Layout>
     ); 

@@ -15,9 +15,9 @@ import { toast } from "react-hot-toast";
       value => /^[a-zA-Zа-яА-Я]+((['][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/.test(value)
     )
     .required('Required'),
-    number: Yup.string()
+    phone: Yup.string()
     .test(
-      "number",
+      "phone",
       "Phone number must be digits and can contain spaces, dashes, parentheses and can start with +",
       value =>
         /\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}/.test(
@@ -31,29 +31,28 @@ export const ContactForm = () => {
     const contacts = useSelector(selectContacts);
     const dispatch = useDispatch();
 
-    const handleSubmit = (values, actions) => {
-        const { name, number } = values;
+    const handleSubmit = (contact, actions)=> {
         const isExist = contacts.some(
-        contact => contact.name.toLowerCase() === name.toLowerCase()
-            || contact.number === number
+        item => item.name.toLowerCase() === contact.name.toLowerCase()
+            || item.phone === contact.phone
         );
     
         if (isExist) {
-           toast.error(`${name} or ${number} is already in contacts.`);
-            actions.resetForm();
+           toast.error(`${contact.name} or ${contact.phone} is already in contacts.`);
             return;
         }
 
-        dispatch(addContact(name, number));
+        dispatch(addContact(contact));
+        actions.resetForm();
   };
     return (
         <Formik
             initialValues={
                 {
                     name: "",
-                    number: "",
+                    phone: "",
                 }}
-            onSubmit={handleSubmit}
+            onSubmit={(contact, actions) => handleSubmit(contact, actions)}
             validationSchema={ContactSchema}
         >
             <StyledForm>
@@ -62,8 +61,8 @@ export const ContactForm = () => {
                     <ErrorMsg name="name" component="div"/>
                 </Label>
                 <Label>Number: 
-                <StyledField name="number" type="tel" />
-                    <ErrorMsg name="number" component="div"/>
+                <StyledField name="phone" type="tel" />
+                    <ErrorMsg name="phone" component="div"/>
                     </Label>
                 <Button type="submit">Add contact</Button>
             </StyledForm>
