@@ -18,8 +18,9 @@ code {
 }
 
 ul {
-    margin: 0;
-    padding: 0;
+    list-style: none;
+    padding-left: 0;
+    margin: 0
 }
 
 img {
@@ -37,4 +38,13 @@ h6,
 p {
   margin: 0;
 }
+
+  button {
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    cursor: pointer;
+  }
 `

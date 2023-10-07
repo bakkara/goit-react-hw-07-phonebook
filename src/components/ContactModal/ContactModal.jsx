@@ -1,10 +1,12 @@
 import { ContactSchema } from "components/ContactForm/ContactForm";
-import { Button, ErrorMsg, Label, StyledField, StyledForm } from "components/ContactForm/ContactForm.styled";
+import { ErrorMsg, Label, StyledField, StyledForm } from "components/ContactForm/ContactForm.styled";
 import { Formik } from "formik";
 import Modal from "react-modal";
 import { useDispatch } from "react-redux";
 import { editContact } from 'redux/operations';
-import { customStyles, ModalContainer } from "./ContactModal.styled";
+import { customStyles, ModalContainer, SaveButton, CancelButton } from "./ContactModal.styled";
+import { RiSaveLine } from 'react-icons/ri';
+import { MdCancelPresentation } from 'react-icons/md';
 
 const ContactEditModal = ({ isOpen, contact, onRequestClose }) => {
    const initialValues = {
@@ -42,8 +44,9 @@ const ContactEditModal = ({ isOpen, contact, onRequestClose }) => {
               <ErrorMsg name="phone" component="div" />
             </div>
             <div>
-              <Button type="submit">Save</Button>
-              <Button onClick={onRequestClose}>Cancel</Button>
+              <SaveButton type="submit"><RiSaveLine size={24}/></SaveButton>
+            <CancelButton onClick={onRequestClose}><MdCancelPresentation size={24}/></CancelButton>
+                          
             </div>
           </StyledForm>
               </Formik>

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 export const StyledForm = styled(Form)`
   border-radius: 4px;
-  border: 1px solid black;
   padding: 8px;
   display: flex;
   flex-direction: column;

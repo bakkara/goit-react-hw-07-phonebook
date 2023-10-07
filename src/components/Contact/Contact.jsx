@@ -1,9 +1,10 @@
-import { Button } from "components/ContactForm/ContactForm.styled"
-import { ContactWrapper } from "./Contact.styled"
+
+import { ContactWrapper, DeleteButton, EditButton, TextContact } from "./Contact.styled"
 import { useDispatch } from 'react-redux';
 import { deleteContact } from 'redux/operations';
 import { useState } from "react";
 import ContactEditModal from "components/ContactModal/ContactModal";
+import { RiDeleteBinLine, RiEditLine } from 'react-icons/ri';
 
 export const Contact = ({
     contact: { id, name, phone },
@@ -20,10 +21,14 @@ export const Contact = ({
     setIsEditing(false);
   };
     return (
-        <ContactWrapper>
-            <p>{name}: {phone}</p>
-        <Button onClick={() => dispatch(deleteContact(id))}>Delete</Button>
-        <Button onClick={handleEditClick}>Edit</Button>
+      <ContactWrapper>
+        <TextContact>
+          <p>{name}: </p>
+          <p> {phone}</p>
+        </TextContact>
+        
+        <DeleteButton onClick={() => dispatch(deleteContact(id))}><RiDeleteBinLine size={24} /></DeleteButton>
+        <EditButton onClick={handleEditClick}><RiEditLine size={24}/></EditButton>
       {isEditing && (
           <ContactEditModal
             isOpen = {isEditing}
